@@ -12,7 +12,7 @@ from datetime import datetime
 
 def login_user(request):
     """
-    Checks if user is logged in,
+    Checks if the user is logged in,
     else, redirect them back to the login page.
     """
     if request.user.is_authenticated:
@@ -34,12 +34,18 @@ def login_user(request):
 
 
 def logout_user(request):
+    """
+    Logs the user out of the session, then redirect them back to the login page.
+    """
     logout(request)
     return redirect('login')
 
 
 @login_required(login_url='login')
 def home(request):
+    """
+    Renders the home page and displays relevant logged-in user information 
+    """
     user = request.user
     user_task_count = Task.objects.filter(assignee=user).count()
     user_incomplete = Task.objects.filter(assignee=user, is_completed='No').count()
@@ -56,6 +62,9 @@ def home(request):
 
 @login_required(login_url='login')
 def register_user(request):
+    """
+    Renders the 'register user' page and saves new users to the database
+    """
     if not request.user.is_staff:
         return redirect('home')
 
@@ -72,6 +81,9 @@ def register_user(request):
 
 @login_required(login_url='login')
 def add_task(request):
+    """
+    Renders the 'add task' page and saves new tasks to the database
+    """
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -85,6 +97,9 @@ def add_task(request):
 
 @login_required(login_url='login')
 def view_all_tasks(request):
+    """
+    Renders the 'View all tasks' page and displays all task information. (Only accessible by admin users) 
+    """
     if not request.user.is_staff:
         return redirect('home')
 
@@ -95,6 +110,9 @@ def view_all_tasks(request):
 
 @login_required(login_url='login')
 def view_my_tasks(request):
+    """
+    Renders the 'View my tasks' page and displays all task information assigned to the logged-in user.
+    """
     user = request.user
     tasks = Task.objects.filter(assignee=user).order_by('due_date')
     context = {'tasks': tasks}
@@ -103,6 +121,9 @@ def view_my_tasks(request):
 
 @login_required(login_url='login')
 def edit_task(request, task_id):
+    """
+    Renders the 'edit task' page and saves the new changes of the selected task to the database
+    """
     task = get_object_or_404(Task, id=task_id)
 
     if task.assignee != request.user:
@@ -121,6 +142,9 @@ def edit_task(request, task_id):
 
 @login_required(login_url='login')
 def mark_complete(request, task_id):
+    """
+    Marks the selected task as complete, then redirects back to the 'view my tasks' page.
+    """
     task = get_object_or_404(Task, id=task_id)
 
     if task.assignee != request.user:
@@ -205,20 +229,3 @@ def generate_reports(request):
     }
 
     return render(request, 'reports.html', context)
-
-# def task_list(request):
-#     """
-#     Views all Tasks if the user is logged in,
-#     else, request authentication by logging in.
-#     """
-#     if request.user.is_authenticated:
-#         tasks = Task.objects.all()
-#
-#         context = {
-#             'tasks': tasks,
-#             'page_title': 'All Tasks'
-#         }
-#
-#         return render(request, '', context)
-#     else:
-#         return authentication(request)
