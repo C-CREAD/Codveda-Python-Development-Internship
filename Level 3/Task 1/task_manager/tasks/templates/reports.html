@@ -1,0 +1,56 @@
+<!-- Reports Template -->
+{% extends 'base.html' %}
+
+{% block title %}Reports - Task Manager{% endblock %}
+
+{% block content %}
+<div class="reports-container">
+    <h2>Task & User Overview Reports</h2>
+
+    <section class="report-section">
+        <h3>Task Overview</h3>
+        <div class="report-box">
+            <p><strong>Total Tasks:</strong> {{ task_stats.total }}</p>
+            <p><strong>Completed:</strong> {{ task_stats.completed }}</p>
+            <p><strong>Incomplete:</strong> {{ task_stats.incomplete }}</p>
+            <p><strong>Overdue:</strong> {{ task_stats.overdue }}</p>
+            <p><strong>Incomplete Percentage:</strong> {{ task_stats.incomplete_percentage }}%</p>
+            <p><strong>Overdue Percentage:</strong> {{ task_stats.overdue_percentage }}%</p>
+        </div>
+    </section>
+
+    <section class="report-section">
+        <h3>User Statistics</h3>
+        {% if user_stats %}
+        <div class="stats-table-wrapper">
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Assigned Tasks</th>
+                        <th>Assigned %</th>
+                        <th>Completed %</th>
+                        <th>Incomplete %</th>
+                        <th>Overdue %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for username, stats in user_stats.items %}
+                    <tr>
+                        <td>{{ username }}</td>
+                        <td>{{ stats.assigned }}</td>
+                        <td>{{ stats.assigned_percentage }}%</td>
+                        <td>{{ stats.completed_percentage }}%</td>
+                        <td>{{ stats.incomplete_percentage }}%</td>
+                        <td>{{ stats.overdue_percentage }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No user statistics available.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

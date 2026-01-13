@@ -1,0 +1,39 @@
+Created By: Shingai Dzinotyiweyi
+
+Task 1: Django Web Application with Authentication
+Build a fully functional web application using Django that includes
+user authentication (login, registration, and password reset).
+The application can be a blog, task manager, or e-commerce site
+
+Objectives:
+✅ - Implement user registration, login, and logout functionality.
+✅ - Secure user passwords using Django’s built-in authentication system.
+✅ - Create user roles (e.g., admin, regular user) with different permissions.
+✅ - Integrate password reset functionality via email.
+     NOTE: To ensure this feature works, all admin/non-admin users must be registered with a valid email address.
+
+
+1. Navigate to the terminal, then go the 'task_manager' directory where manage.py resides.
+
+2. Run the following commands in order:
+   a) - pip install -r requirements.txt
+   b) - python makemigrations tasks
+   c) - python manage.py migrate
+   d) - python manage.py createsuperuser
+        (Enter your admin credentials)
+   e) - python manage.py runserver
+
+3. Create your .env file according to the .env.example format. (Required for accessing Password Reset Feature)
+
+4. Go to the browser and access the following link: http://127.0.0.1:8000/
+
+5. Login to the website with either the admin, or non-admin credentials below:
+    (ADMIN)
+    username = admin
+    password = adm1n
+
+    (NON-ADMIN)
+    username = wes
+    password = wes
+
+NOTE: Some features of the project are admin-only, thus logging in as a non-admin user will show fewer features.

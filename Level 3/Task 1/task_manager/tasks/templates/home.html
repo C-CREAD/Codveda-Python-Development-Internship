@@ -1,0 +1,42 @@
+<!-- Home Template -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h2>Dashboard</h2>
+    <p class="current-date">Date: {{ current_date }}</p>
+    
+    <div class="stats-container">
+        <div class="stat-box">
+            <h3>Your Tasks</h3>
+            <p class="stat-number"><strong>Total Assigned: </strong>{{ user_task_count }}</p>
+            <p class="stat-number"><strong>Total Completed: </strong>{{ user_complete }}</p>
+        </div>
+        <div class="stat-box">
+            <h3>Pending</h3>
+            <p class="stat-number"><strong>Incomplete Tasks: </strong>{{ user_incomplete }}</p>
+        </div>
+    </div>
+
+    {% if is_admin %}
+    <div class="admin-menu">
+        <h3>Admin Options</h3>
+        <div class="button-group">
+            <a href="{% url 'register' %}" class="btn btn-info">Register New User</a>
+            <a href="{% url 'reports' %}" class="btn btn-info">View Reports</a>
+            <a href="{% url 'view_all_tasks' %}" class="btn btn-secondary">View All Tasks</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="button-group">
+            <a href="{% url 'add_task' %}" class="btn btn-success">Add New Task</a>
+            <a href="{% url 'view_my_tasks' %}" class="btn btn-primary">View My Tasks</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

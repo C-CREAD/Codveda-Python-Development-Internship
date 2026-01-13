@@ -1,0 +1,9 @@
+File created! Now how many words are there?
+
+How many words are in this text file?
+
+
+Do Emails count as words as well? For example: shin.dzino@gmail.com
+
+
+Now what if there is a bunch of gibberish like: %(& #)#*^*# &# #&07  68q8 #*) #^)@^ 1331

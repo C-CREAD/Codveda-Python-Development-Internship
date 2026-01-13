@@ -1,0 +1,60 @@
+<!-- View My Tasks Template -->
+{% extends 'base.html' %}
+
+{% block title %}All Tasks - Task Manager{% endblock %}
+
+{% block content %}
+<div class="tasks-container">
+    <h2>My Tasks</h2>
+
+    {% if tasks %}
+    <div class="tasks-list">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Assigned Date</th>
+                    <th>Completed</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.created_at }}</td>
+                    <td>
+                        {% if task.is_completed == 'Yes' %}
+                            <span class="badge bg-success">Yes</span>
+                        {% elif task.is_completed == 'No' %}
+                            {% if task.is_overdue %}
+                                <span class="badge bg-danger text-dark">No (Task Overdue)</span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">No</span>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if task.is_completed == 'No' %}
+                        <a href="{% url 'mark_complete' task.id %}" class="btn btn-success btn-small">Mark Complete</a>
+                        <a href="{% url 'edit_task' task.id %}" class="btn btn-primary btn-small">Edit</a>
+                        {% else %}
+                        <a href="{% url 'edit_task' task.id %}" class="btn btn-primary btn-small disabled" aria-disabled="true">Edit</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="no-tasks">No tasks assigned to you.</p>
+    {% endif %}
+</div>
+{% endblock %}

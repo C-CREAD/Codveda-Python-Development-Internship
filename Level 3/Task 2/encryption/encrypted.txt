@@ -1,0 +1,65 @@
+Ymnx knqj bnqq gj zxji ktw jshwduynts. Qfyjw ny hfs gj ijhwduyji.
+
+Stb qjyx xjj bmfy ymnx Udymts htij kwtr (Qjajq 1 - Yfxp 1) qttpx qnpj ns Hfjxfw'x Jshwduynts:
+ijk fii(c, d):
+    """
+    Ujwktwrx fiinynts gjybjjs c fsi d
+    """
+    wjyzws c + d
+
+
+ijk xzgywfhy(c, d):
+    """
+    Ujwktwrx xzgywfhynts gjybjjs c fsi d
+    """
+    wjyzws c - d
+
+
+ijk rzqynuqd(c, d):
+    """
+    Ujwktwrx rzqynuqnhfynts gjybjjs c fsi d
+    """
+    wjyzws c + d
+
+
+ijk inanij(c, d):
+    """
+    Ujwktwrx inanxnts gjybjjs c fsi d
+    """
+    ywd:
+        wjyzws c / d
+
+    jchjuy EjwtInanxntsJwwtw:
+        wjyzws "Jwwtw: Inanxnts gd 0"
+
+
+bmnqj Ywzj:
+    c = kqtfy(nsuzy("Jsyjw knwxy szrgjw: "))
+    d = kqtfy(nsuzy("Jsyjw xjhtsi szrgjw: "))
+
+    tujwfynts = nsy(nsuzy("Xjqjhy fs tujwfynts (Szrgjwx Tsqd)\s"
+                          "0. Jcny\s"
+                          "1. Fii\s"
+                          "2. Xzgywfhy\s"
+                          "3. Rzqynuqd\s"
+                          "4. Inanij\s: "))
+
+    nk tujwfynts == 0:
+        gwjfp
+
+    jqnk tujwfynts == 1:
+        uwnsy(fii(c, d))
+
+    jqnk tujwfynts == 2:
+        uwnsy(xzgywfhy(c, d))
+
+    jqnk tujwfynts == 3:
+        uwnsy(rzqynuqd(c, d))
+
+    jqnk tujwfynts == 4:
+        uwnsy(inanij(c, d))
+
+    jqxj:
+        uwnsy("Nsafqni Jsywd!")
+
+    uwnsy("\s--------------------------\s")
